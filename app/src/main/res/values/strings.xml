@@ -7,4 +7,7 @@
     <string name="air">Эфир</string>
     <string name="complex">Комплекс</string>
     <string name="ft2">FT2</string>
+    <string name="duration">Длительность</string>
+    <string name="type">Тип тренировки</string>
+    <string name="min_unit">мин.</string>
 </resources>

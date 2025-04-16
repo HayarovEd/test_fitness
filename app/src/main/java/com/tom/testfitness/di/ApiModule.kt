@@ -3,7 +3,9 @@ package com.tom.testfitness.di
 import android.content.Context
 import androidx.annotation.OptIn
 import androidx.media3.common.util.UnstableApi
+import androidx.media3.datasource.DefaultHttpDataSource
 import androidx.media3.exoplayer.ExoPlayer
+import androidx.media3.exoplayer.source.DefaultMediaSourceFactory
 import com.tom.testfitness.data.remote.ApiFitness
 import com.tom.testfitness.domain.utils.BASE_URL
 import dagger.Module
@@ -38,8 +40,15 @@ object ApiModule {
     fun providePlayer(
         @ApplicationContext appContext: Context
     ): ExoPlayer {
+        val httpDataSourceFactory =
+            DefaultHttpDataSource.Factory().setAllowCrossProtocolRedirects(true)
         return ExoPlayer
             .Builder(appContext)
+            .setMediaSourceFactory(
+                DefaultMediaSourceFactory(appContext).setDataSourceFactory(
+                    httpDataSourceFactory
+                )
+            )
             .build()
     }
 

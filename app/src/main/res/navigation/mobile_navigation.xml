@@ -11,7 +11,7 @@
         android:label="@string/title_home"
         tools:layout="@layout/fragment_home" >
         <action
-            android:id="@+id/action_navigation_home_to_navigation_dashboard"
+            android:id="@+id/action_navigation_home_to_navigation_player"
             app:destination="@id/navigation_dashboard" />
     </fragment>
 
@@ -21,7 +21,7 @@
         android:label="@string/title_dashboard"
         tools:layout="@layout/fragment_player" >
         <action
-            android:id="@+id/action_navigation_dashboard_to_navigation_home"
+            android:id="@+id/action_navigation_player_to_navigation_home"
             app:destination="@id/navigation_home" />
     </fragment>
 

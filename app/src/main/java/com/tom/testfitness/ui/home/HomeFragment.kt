@@ -5,13 +5,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SearchView
+import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.tom.testfitness.R
 import com.tom.testfitness.databinding.FragmentHomeBinding
 import com.tom.testfitness.domain.model.FitnessWorkout
 import com.tom.testfitness.domain.model.TypeFitness
+import com.tom.testfitness.domain.utils.BUNGLE_DESCRIPTION
+import com.tom.testfitness.domain.utils.BUNGLE_ID
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -99,7 +104,12 @@ class HomeFragment : Fragment() {
         val stateClickListener: WorkoutAdapter.OnStateClickListener =
             object : WorkoutAdapter.OnStateClickListener {
                 override fun onStateClick(fitnessWorkout: FitnessWorkout, position: Int) {
-
+                    val bundle = bundleOf(
+                        BUNGLE_ID to fitnessWorkout.id,
+                        BUNGLE_DESCRIPTION to fitnessWorkout.description
+                    )
+                    requireView().findNavController()
+                        .navigate(R.id.action_navigation_home_to_navigation_player, bundle)
                 }
             }
         val adapter = WorkoutAdapter(data, stateClickListener, requireContext())
