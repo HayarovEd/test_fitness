@@ -36,16 +36,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/descTv"/>
 
-    <TextView
-        android:id="@+id/durationTv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="type"
-        android:textSize="14sp"
-        app:layout_constraintStart_toEndOf="@id/typeTv"
-        app:layout_constraintTop_toBottomOf="@id/descTv"/>
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

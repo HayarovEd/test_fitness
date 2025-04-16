@@ -1,6 +1,7 @@
 package com.tom.testfitness
 
 import android.os.Bundle
+import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import com.tom.testfitness.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -17,5 +18,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         supportActionBar?.hide()
+        enableEdgeToEdge()
     }
 }

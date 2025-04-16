@@ -4,9 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginBottom="70.dp"
     tools:context=".ui.home.HomeFragment">
 
     <ProgressBar
+        android:id="@+id/progress"
         android:layout_width="100dp"
         android:layout_height="100dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -34,10 +36,40 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:queryHint="Поиск..."
+        android:visibility="gone"
         app:layout_constraintTop_toTopOf="parent"/>
+
+    <RadioGroup
+        android:id="@+id/typeRadioGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@id/searchView"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <RadioButton
+            android:id="@+id/rb_traning"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/traning" />
+
+        <RadioButton
+            android:id="@+id/rb_air"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/air" />
+
+        <RadioButton
+            android:id="@+id/rb_complex"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/complex" />
+    </RadioGroup>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
@@ -46,5 +78,6 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        app:layout_constraintTop_toBottomOf="@id/searchView"/>
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@id/typeRadioGroup"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
