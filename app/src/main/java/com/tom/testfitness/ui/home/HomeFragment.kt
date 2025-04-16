@@ -4,12 +4,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.SearchView
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.tom.testfitness.databinding.FragmentHomeBinding
 import com.tom.testfitness.domain.model.FitnessWorkout
+import com.tom.testfitness.domain.model.TypeFitness
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -61,6 +63,33 @@ class HomeFragment : Fragment() {
                 }
             }
         }
+        viewModel.stateTypeFitness.observe(viewLifecycleOwner) { type ->
+            when (type) {
+                TypeFitness.TRENING -> binding.typeRadioGroup.check(binding.rbTraning.id)
+                TypeFitness.AIR -> binding.typeRadioGroup.check(binding.rbAir.id)
+                TypeFitness.COMPLEX -> binding.typeRadioGroup.check(binding.rbComplex.id)
+                null -> {}
+            }
+        }
+        binding.typeRadioGroup.setOnCheckedChangeListener { _, checkedId ->
+            when (checkedId) {
+                binding.rbTraning.id -> viewModel.filterByType(TypeFitness.TRENING)
+                binding.rbAir.id -> viewModel.filterByType(TypeFitness.AIR)
+                binding.rbComplex.id -> viewModel.filterByType(TypeFitness.COMPLEX)
+            }
+        }
+        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                newText?.let {
+                    viewModel.filterByQuery(it)
+                }
+                return true
+            }
+        })
     }
 
     private fun initRecyclerView(data: List<FitnessWorkout>) {

@@ -22,6 +22,11 @@ class HomeViewModel @Inject constructor(
     private val _state = MutableLiveData<HomeState>(HomeState.Loading)
     val state = _state
 
+    private val _stateTypeFitness = MutableLiveData(TypeFitness.TRENING)
+    val stateTypeFitness = _stateTypeFitness
+
+    private val _stateQuery = MutableLiveData("")
+
     init {
         getWorkouts()
     }
@@ -39,36 +44,44 @@ class HomeViewModel @Inject constructor(
                     _state.value = HomeState.Success(
                         workouts = result.data ?: emptyList(),
                     )
+                    filterAll()
                 }
             }
         }
     }
 
     fun filterByQuery(query: String) {
-        _state.value = (state.value as HomeState.Success).copy(
-            query = query
-        )
+        _stateQuery.value = query
         filterAll()
     }
 
     fun filterByType(typeFitness: TypeFitness) {
-        _state.value = (state.value as HomeState.Success).copy(
-            typeFitness = typeFitness
-        )
+        _stateTypeFitness.value = typeFitness
         filterAll()
     }
 
     private fun filterAll() {
-        val query = (state.value as HomeState.Success).query
-        val typeFitness = (state.value as HomeState.Success).typeFitness
-        _state.value = (state.value as HomeState.Success).copy(
-            workouts = fullWorkouts.filter {
-                it.title
-                    .contains(
-                        other = query,
-                        ignoreCase = true
-                    ) || it.type == typeFitness
+        if (state.value is HomeState.Success) {
+            val query = _stateQuery.value ?: ""
+            if (query.isBlank()) {
+                _state.value = (state.value as HomeState.Success).copy(
+                    workouts = fullWorkouts.filter {
+                        it.type == stateTypeFitness.value
+
+                    }
+                )
+            } else {
+                _state.value = (state.value as HomeState.Success).copy(
+                    workouts = fullWorkouts.filter {
+                        it.type == stateTypeFitness.value
+                                && it.title
+                            .contains(
+                                other = query,
+                                ignoreCase = true
+                            )
+                    }
+                )
             }
-        )
+        }
     }
 }
