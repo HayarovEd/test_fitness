@@ -1,5 +1,6 @@
 package com.tom.testfitness.data.repository
 
+import android.util.Log
 import com.tom.testfitness.data.mapper.convertToFitnessVideo
 import com.tom.testfitness.data.mapper.convertToFitnessWorkout
 import com.tom.testfitness.data.remote.ApiFitness

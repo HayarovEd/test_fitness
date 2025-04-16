@@ -5,7 +5,7 @@ import com.tom.testfitness.data.remote.FitnessWorkoutDto
 import com.tom.testfitness.domain.model.FitnessVideo
 import com.tom.testfitness.domain.model.FitnessWorkout
 import com.tom.testfitness.domain.utils.BASE_URL
-import com.tom.testfitness.domain.utils.converToType
+import com.tom.testfitness.domain.utils.convertToType
 
 fun FitnessWorkoutDto.convertToFitnessWorkout(): FitnessWorkout {
     return FitnessWorkout(
@@ -13,7 +13,7 @@ fun FitnessWorkoutDto.convertToFitnessWorkout(): FitnessWorkout {
         duration = duration,
         id = id,
         title = title,
-        type = type.converToType()
+        type = type.convertToType()
     )
 }
 

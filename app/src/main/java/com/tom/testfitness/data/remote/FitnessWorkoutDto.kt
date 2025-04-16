@@ -7,7 +7,7 @@ data class FitnessWorkoutDto(
     @SerializedName("description")
     val description: String?,
     @SerializedName("duration")
-    val duration: Int,
+    val duration: String,
     @SerializedName("id")
     val id: Int,
     @SerializedName("title")

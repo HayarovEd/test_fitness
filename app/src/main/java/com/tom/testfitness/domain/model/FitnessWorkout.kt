@@ -3,7 +3,7 @@ package com.tom.testfitness.domain.model
 
 data class FitnessWorkout(
     val description: String?,
-    val duration: Int,
+    val duration: String,
     val id: Int,
     val title: String,
     val type: TypeFitness
